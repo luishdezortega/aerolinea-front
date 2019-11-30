@@ -1,0 +1,52 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 mt-3 mb-3">
+      <h3>LISTA DE VUELOS</h3>
+      <hr>
+    </div>
+    <div *ngFor="let flight of flightList; let i = index;" class="col-12 col-lg-4 mb-5">
+      <div class="card  bg-light  mb-3">
+        <div class="card-header text-center font-weight-bold text-white bg-info">
+          VUELO #{{ i + 1 }} - {{flight.avion.numSerie}}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Detalle</h5>
+
+          <p class="card-text">
+            <em class="fas i-blue fa-plane-departure"></em>
+            <span class="mw-200"> Fecha salida: </span> {{ flight.trayecto.dateExit | date  }}
+          </p>
+          <p class="card-text">
+            <em class="fas i-blue fa-plane-arrival"></em>
+            <span class="mw-200"> Fecha llegada: </span> {{ flight.trayecto.dateArrival | date}}
+          </p>
+          <p class="card-text">
+            <em class="fas i-blue fa-map-marker-alt"></em>
+            <span class="mw-200"> Origen: </span> {{ flight.trayecto.originCity   }}
+          </p>
+          <p class="card-text">
+            <em class="fas i-blue fa-map-marker-alt"></em>
+            <span class="mw-200"> Destino </span> {{ flight.trayecto.destinationCity}}
+          </p>
+          <p class="card-text">
+            <em class="fas i-blue fa-dollar-sign"></em>
+            <span class="mw-200"> Precio </span> {{ flight.price}}
+          </p>
+
+          <div class="col-12 text-center">
+            <button class="btn btn-outline-info" (click)="open(modal, flight.avion.id)">
+              RESERVAR
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="flightList.length === 0" class="alert alert-info" role="alert">
+      No hay vuelo disponibles o ha ocurrido un error
+    </div>
+  </div>
+</div>
+<ng-template #modal let-modal>
+  <app-create-reservation-modal [idVueloSelected]="idVueloSelected"></app-create-reservation-modal>
+</ng-template>

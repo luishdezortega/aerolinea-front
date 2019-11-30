@@ -1,0 +1,10 @@
+.container {
+    label{
+        font-weight: bold;
+    }
+    padding: 15px;
+    .button{
+        display: flex;
+        justify-content: flex-end;
+    }
+}
